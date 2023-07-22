@@ -13,7 +13,7 @@ Table of Contents                       *open-handlers.nvim-table-of-contents*
 1. open-handlers.nvim                  *open-handlers.nvim-open-handlers.nvim*
 
 A very simple plugin that allows multiple custom `vim.ui.open` handlers to
-co-exist.
+co-exist, allowing you to extend `gx` while retaining the default behaviour.
 
 
 REQUIREMENTS              *open-handlers.nvim-open-handlers.nvim-requirements*
@@ -34,6 +34,8 @@ LAZY.NVIM ~
         local oh = require("open-handlers")
     
         oh.setup({
+          -- In order, each handler is tried.
+          -- The first handler to successfully open will be used.
           handlers = {
             oh.issue, -- A builtin which handles github and gitlab issues
             oh.native -- Default native handler. Should always be last
@@ -51,9 +53,14 @@ OH.ISSUE ~
 
 1. Example:
 
-`vim.ui.open("#10")` will open issue number 10 in your browser
+`vim.ui.open("#10")` will open issue number 10 in your browser.
 
 
+
+
+OH.NATIVE ~
+
+Equivalent to `vim.ui.open` before it is overwritten.
 
 
 WRITING CUSTOM HANDLERS*open-handlers.nvim-open-handlers.nvim-writing-custom-handlers*
