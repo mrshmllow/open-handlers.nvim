@@ -1,0 +1,42 @@
+* open-handlers.nvim
+
+A very simple plugin that allows multiple custom =vim.ui.open= handlers to 
+co-exist.
+
+** Requirements
+
+- Neovim v0.10 or later (nightly currently)
+
+** Setup
+
+*** lazy.nvim
+
+#+begin_src lua
+{
+  "mrshmllow/open-handlers.nvim",
+  lazy = false,
+  config = function()
+    local oh = require("open-handlers")
+
+    oh.setup({
+      handlers = {
+        oh.issue, -- A builtin which handles github and gitlab issues
+        oh.native -- Default native handler. Should always be last
+      },
+    })
+  end,
+},
+#+end_src
+
+** Usage
+*** =oh.issue=
+**** Example:
+
+=vim.ui.open("#10")= will open issue number 10 in your browser
+
+** Writing custom handlers
+
+Any custom handlers should copy =vim.ui.open='s function signature. If it
+returns =nil, nil= it will be ignored. See source for examples.
+
+
