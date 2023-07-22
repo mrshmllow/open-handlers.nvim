@@ -1,7 +1,7 @@
 * open-handlers.nvim
 
 A very simple plugin that allows multiple custom =vim.ui.open= handlers to 
-co-exist.
+co-exist, allowing you to extend =gx= while retaining the default behaviour.
 
 ** Requirements
 
@@ -19,6 +19,8 @@ co-exist.
     local oh = require("open-handlers")
 
     oh.setup({
+      -- In order, each handler is tried.
+      -- The first handler to successfully open will be used.
       handlers = {
         oh.issue, -- A builtin which handles github and gitlab issues
         oh.native -- Default native handler. Should always be last
@@ -32,11 +34,14 @@ co-exist.
 *** =oh.issue=
 **** Example:
 
-=vim.ui.open("#10")= will open issue number 10 in your browser
+=vim.ui.open("#10")= will open issue number 10 in your browser.
+
+*** =oh.native=
+
+Equivalent to =vim.ui.open= before it is overwritten.
 
 ** Writing custom handlers
 
 Any custom handlers should copy =vim.ui.open='s function signature. If it
 returns =nil, nil= it will be ignored. See source for examples.
-
 

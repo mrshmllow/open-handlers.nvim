@@ -6,8 +6,6 @@ M.native = vim.ui.open
 
 function M.issue(path)
 	if vim.startswith(path, "#") then
-		vim.print("using github")
-
 		path = path:sub(2)
 
 		local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
@@ -26,7 +24,9 @@ end
 function M.setup(opts)
 	opts = opts or {}
 
-	M.handlers = opts.handlers and opts.handlers or {}
+	M.handlers = opts.handlers and opts.handlers or {
+		M.native,
+	}
 end
 
 function vim.ui.open(path)
