@@ -69,7 +69,7 @@ function vim.ui.open(path)
 			return res, err
 		end
 
-		if res == nil then
+		if res ~= nil then
 			return nil, nil
 		end
 	end
