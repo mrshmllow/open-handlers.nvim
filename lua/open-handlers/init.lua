@@ -36,8 +36,6 @@ end
 function M.commit(path)
 	local res = vim.system({ "git", "rev-parse", "--verify", "--quiet", path }, { text = true }):wait()
 
-	vim.print(path, res)
-
 	if res.code ~= 0 then
 		return nil, nil
 	end
@@ -67,8 +65,12 @@ function vim.ui.open(path)
 	for _, handler in ipairs(M.handlers) do
 		local res, err = handler(path)
 
-		if res ~= nil then
+		if err ~= nil then
 			return res, err
+		end
+
+		if res == nil then
+			return nil, nil
 		end
 	end
 
