@@ -3,6 +3,8 @@
 A very simple plugin that allows multiple custom =vim.ui.open= handlers to 
 co-exist, allowing you to extend =gx= while retaining the default behaviour.
 
+[[https://github.com/mrshmllow/open-handlers.nvim/assets/40532058/37141248-138e-4214-be3f-10e30aab1a82][Demonstration]]
+
 ** Requirements
 
 - Neovim v0.10 or later (nightly currently)
