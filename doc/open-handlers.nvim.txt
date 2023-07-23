@@ -29,7 +29,9 @@ LAZY.NVIM ~
 >lua
     {
       "mrshmllow/open-handlers.nvim",
+      -- We modify builtin functions, so be careful lazy loading
       lazy = false,
+      cond = vim.ui.open ~= nil,
       config = function()
         local oh = require("open-handlers")
     
