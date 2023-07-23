@@ -14,7 +14,9 @@ co-exist, allowing you to extend =gx= while retaining the default behaviour.
 #+begin_src lua
 {
   "mrshmllow/open-handlers.nvim",
+  -- We modify builtin functions, so be careful lazy loading
   lazy = false,
+  cond = vim.ui.open ~= nil,
   config = function()
     local oh = require("open-handlers")
 
