@@ -15,6 +15,9 @@ Table of Contents                       *open-handlers.nvim-table-of-contents*
 A very simple plugin that allows multiple custom `vim.ui.open` handlers to
 co-exist, allowing you to extend `gx` while retaining the default behaviour.
 
+Demonstration
+<https://github.com/mrshmllow/open-handlers.nvim/assets/40532058/37141248-138e-4214-be3f-10e30aab1a82>
+
 
 REQUIREMENTS              *open-handlers.nvim-open-handlers.nvim-requirements*
 
