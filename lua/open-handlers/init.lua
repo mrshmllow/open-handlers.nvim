@@ -4,6 +4,19 @@ local M = {
 
 M.native = vim.ui.open
 
+---@param url string
+---@return string
+local function ssh_to_http(url)
+	local provider, path = url:match("git@(.-):(.+)")
+	if provider and path then
+		-- found a few Gitlab instances with ssh. subdomain
+		provider = provider:gsub("^ssh%.", "")
+		return ("https://%s/%s"):format(provider, path)
+	end
+
+	return url
+end
+
 ---@return nil|string
 local function get_git_origin()
 	local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
@@ -12,7 +25,7 @@ local function get_git_origin()
 		return nil
 	end
 
-	return res.stdout
+	return ssh_to_http(res.stdout)
 end
 
 local FAILED_GET_ORIGIN = "Failed to get git remote.origin.url"
