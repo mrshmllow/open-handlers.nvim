@@ -7,7 +7,7 @@ co-exist, allowing you to extend =gx= while retaining the default behaviour.
 
 ** Requirements
 
-- Neovim v0.10 or later (nightly currently)
+- Neovim v0.10 or later (nightly currently, post [[https://github.com/neovim/neovim/pull/24420][#24420]])
 
 ** Setup
 
