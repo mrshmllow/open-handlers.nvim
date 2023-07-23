@@ -4,21 +4,51 @@ local M = {
 
 M.native = vim.ui.open
 
+---@return nil|string
+local function get_git_origin()
+	local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+
+	if res.code ~= 0 then
+		return nil
+	end
+
+	return res.stdout
+end
+
+local FAILED_GET_ORIGIN = "Failed to get git remote.origin.url"
+
 function M.issue(path)
 	if vim.startswith(path, "#") then
 		path = path:sub(2)
 
-		local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+		local res = get_git_origin()
 
-		if res.code ~= 0 then
-			return nil, "Failed to get git remote.origin.url"
+		if res == nil then
+			return nil, FAILED_GET_ORIGIN
 		end
 
-		-- Works on github and gitlab!
-		return M.native(res.stdout .. "/issues/" .. path)
+		return M.native(res .. "/issues/" .. path)
 	end
 
 	return nil, nil
+end
+
+function M.commit(path)
+	local res = vim.system({ "git", "rev-parse", "--verify", "--quiet", path }, { text = true }):wait()
+
+	vim.print(path, res)
+
+	if res.code ~= 0 then
+		return nil, nil
+	end
+
+	local origin = get_git_origin()
+
+	if origin == nil then
+		return nil, FAILED_GET_ORIGIN
+	end
+
+	return M.native(origin .. "/commit/" .. res.stdout)
 end
 
 function M.setup(opts)

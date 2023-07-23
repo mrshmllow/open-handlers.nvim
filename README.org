@@ -23,6 +23,7 @@ co-exist, allowing you to extend =gx= while retaining the default behaviour.
       -- The first handler to successfully open will be used.
       handlers = {
         oh.issue, -- A builtin which handles github and gitlab issues
+        oh.commit, -- A builtin which handles git commits
         oh.native -- Default native handler. Should always be last
       },
     })
@@ -32,9 +33,24 @@ co-exist, allowing you to extend =gx= while retaining the default behaviour.
 
 ** Usage
 *** =oh.issue=
+
+Opens Github and Gitlab issues in your browser, based on current :pwd git
+origin.
+
 **** Example:
 
 =vim.ui.open("#10")= will open issue number 10 in your browser.
+
+*** =oh.commit=
+
+Opens commits in your browser, based on current :pwd git origin.
+
+**** Example
+
+=vim.ui.open("596745da31fcefc180d2c331805f303b558e7e82")= will open commit
+596745 in your browser.
+
+=vim.ui.open("596745")= will open git commit 596745 in your browser.
 
 *** =oh.native=
 
