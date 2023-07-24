@@ -1,4 +1,4 @@
-*open-handlers.nvim.txt*       For NVIM v0.10.0      Last change: 2023 July 23
+*open-handlers.nvim.txt*       For NVIM v0.10.0      Last change: 2023 July 24
 
 ==============================================================================
 Table of Contents                       *open-handlers.nvim-table-of-contents*
@@ -21,8 +21,7 @@ Demonstration
 
 REQUIREMENTS              *open-handlers.nvim-open-handlers.nvim-requirements*
 
-- Neovim v0.10 or later (nightly currently, post
-    #24420 <https://github.com/neovim/neovim/pull/24420>)
+- Neovim v0.10 or later (nightly currently)
 
 
 SETUP                            *open-handlers.nvim-open-handlers.nvim-setup*
