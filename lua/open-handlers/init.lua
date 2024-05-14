@@ -17,12 +17,23 @@ local function ssh_to_http(url)
 	return url
 end
 
+---remove `.git` from the end of the url
+---@param url string
+---@return string
+local function clean_git(url)
+	local clean = string.gsub(url, "%.git%s*$", "")
+	return clean
+end
+
 ---@return nil|string
 local function get_git_origin()
-	local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+	local res = vim.system({ "git", "config", "--get", "remote.upstream.url" }, { text = true }):wait()
 
 	if res.code ~= 0 then
-		return nil
+		res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+		if res.code ~= 0 then
+			return nil
+		end
 	end
 
 	return ssh_to_http(res.stdout)
@@ -39,6 +50,8 @@ function M.issue(path)
 		if res == nil then
 			return nil, FAILED_GET_ORIGIN
 		end
+
+		res = clean_git(res)
 
 		return M.native(res .. "/issues/" .. path)
 	end
