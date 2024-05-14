@@ -19,10 +19,13 @@ end
 
 ---@return nil|string
 local function get_git_origin()
-	local res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+	local res = vim.system({ "git", "config", "--get", "remote.upstream.url" }, { text = true }):wait()
 
 	if res.code ~= 0 then
-		return nil
+		res = vim.system({ "git", "config", "--get", "remote.origin.url" }, { text = true }):wait()
+		if res.code ~= 0 then
+			return nil
+		end
 	end
 
 	return ssh_to_http(res.stdout)
