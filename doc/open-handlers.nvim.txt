@@ -1,4 +1,4 @@
-*open-handlers.nvim.txt*       For NVIM v0.10.0      Last change: 2023 July 24
+*open-handlers.nvim.txt*       For NVIM v0.10.0      Last change: 2024 July 05
 
 ==============================================================================
 Table of Contents                       *open-handlers.nvim-table-of-contents*
